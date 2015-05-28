@@ -16,13 +16,6 @@ $schema = DB::table('rel_schema')->get();
 		</div>
 		@endforeach
 	</div>
-	@if(isset($test))	<!-- ako je sema vec u 3.N.F. -->
-	<div class="list-group">
-		<div class="list-group-item">
-			{{ "<b>Relacijska shema je već u 3. N.F. !!</b>" }}
-		</div>
-	</div>
-	@endif
 </div>
 
 @if(isset($sch))
@@ -51,8 +44,15 @@ $schema = DB::table('rel_schema')->get();
 		@endforeach
 	</div>
 	<a href="{{ URL::route('dekompozicija', array('scheme_ID' => $sch->ID)) }}">
-		<input style="margin-top:20px" type="button" value="Dekompozicija" class="btn btn-danger" />
+		<input style="margin-top:20px;" type="button" value="Dekompozicija" class="btn btn-danger" />
 	</a>
+	@if(isset($test))	<!-- ako je sema vec u 3.N.F. -->
+	<div class="list-group">
+		<div class="list-group-item" style="margin-top:20px;">
+			{{ "<b>Relacijska shema je već u 3. N.F. !!</b>" }}
+		</div>
+	</div>
+	@endif
 </div>
 @endif
 

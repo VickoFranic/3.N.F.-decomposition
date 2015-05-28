@@ -44,13 +44,13 @@ class SchemeController extends BaseController {
 			for ($i=0; $i < $keysNum; $i++) {	// petlja prolazi kroz kljuceve i testira da li je lijeva strana F.O. nadkljuc
 				$cnt = 0;
 				$k = $pk[$i]->pr_key;
-
+				//echo $k . "<br>";
 				foreach ($chars as $char) {
 					if (strstr($k, $char)) {
 						$cnt++;
 					}
 				}
-				if ($cnt >= strlen($k)) {
+				if ($cnt == strlen($k)) {
 					$test = true;
 				}
 			}
@@ -76,11 +76,9 @@ class SchemeController extends BaseController {
 			if ($test)
 				$testCnt++;
 
-			if($testCnt == 0)
-				break;	// znaci da nismo nasli ni jedno pravilo ispunjeno za trenutnu f.o., idi na dekompoziciju
-
+		
 			$FDcnt++;
-			if ($FDcnt == count($fd))
+			if ((($FDcnt == count($fd)) && ($testCnt > 0)) && ($testCnt < (3 * count($fd))))
 				return View::make('showSchemes')->with('test', true)->with('sch', $schema)->with('pk', $pk)->with('fd', $fd);
 	}
 			
