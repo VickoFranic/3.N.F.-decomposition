@@ -1,0 +1,34 @@
+<?php $__env->startSection('content'); ?>
+
+<div class="panel-body">
+	<div class="list-group text-center">
+		<a class="list-group-item" href="<?php echo URL::Route('sheme'); ?>">
+			<?php echo "Prikaži sve sheme/Izračunaj dekompoziciju"; ?>
+
+		</a>
+		<a class="list-group-item" href="<?php echo URL::Route('edit'); ?>">
+			<?php echo "Izmjeni postojeću shemu"; ?>
+
+		</a>
+		<a class="list-group-item" href="<?php echo URL::Route('new'); ?>">
+			<?php echo "Unesi novu shemu"; ?>
+
+		</a>
+	</div>
+</div>
+	<?php if(isset($saved)): ?>
+	<div class="well">
+		<?php echo "Shema je uspješno izmjenjena."; ?>
+
+	</div>
+	<?php endif; ?>
+
+	<?php if(isset($new)): ?>
+	<div class="well">
+		<?php echo "Nova shema unešena u bazu."; ?>
+
+	</div>
+	<?php endif; ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

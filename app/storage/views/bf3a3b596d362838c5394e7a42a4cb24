@@ -1,0 +1,87 @@
+<?php $__env->startSection('content'); ?>
+
+<?php if(isset($sch)): ?>
+<div class="panel-body col-md-4">
+	<p class="well text-center"><b>RELACIJSKE SHEME</b></p>
+	<div class="list-group">
+		<?php foreach($sch as $rs): ?>
+		<div class="list-group-item">
+			<?php echo $rs->rschema; ?>
+
+			<a href="<?php echo URL::route('editScheme', array('id' => $rs->ID)); ?>">Edit</a>
+		</div>
+		<?php endforeach; ?>
+	</div>
+</div>
+<?php endif; ?>
+
+
+<?php if(isset($scheme_id)): ?>
+<div class="panel-body col-md-4 col-md-offset-1">
+	<p class="well text-center">
+		<b>DETALJI</b>
+	</p>
+	<blockquote>Shema: <?php echo $schema->rschema; ?></blockquote>
+	<div class="list-group">
+		<p><b>Ključevi</b></p>
+		<?php foreach($pk as $kljucevi): ?>
+		<div class="list-group-item">
+			<?php echo $kljucevi->pr_key; ?>
+
+		</div>
+		<?php endforeach; ?>
+	</div>
+	<div class="list-group">
+		<p><b>Funkcijske ovisnosti</b></p>
+		<?php foreach($fd as $dep): ?>
+		<div class="list-group-item col-md-6">
+			<?php echo $dep->fd_L; ?>
+
+		</div>
+		<div class="list-group-item col-md-6">
+			<?php echo $dep->fd_R; ?>
+
+		</div>
+		<?php endforeach; ?>
+	</div>
+</div>
+
+<div class="panel-body col-md-4 col-md-offset-1">
+	<p class="well text-center">
+		<b>EDIT</b>
+
+		<form method="POST" action="<?php echo URL::route('save', array('id' => $schema->ID)); ?>">
+			<div class="form-group">
+				<label>Shema:</label>
+				<input class="form-control" required name="schema" value="<?php echo $schema->rschema; ?>">
+			</div>
+			<label>Ključevi:</label>
+			<?php $cntKeys = 0; ?>
+			<?php foreach($pk as $kljucevi): ?>
+			<div class="form-group">
+				<input class="form-control" required name="<?php echo 'key' . $cntKeys; ?>" value="<?php echo $kljucevi->pr_key; ?>">
+			</div>
+			<?php	$cntKeys++; ?>
+			<?php endforeach; ?>
+
+			<label>Funkcijske ovisnosti:</label><br>
+			<?php $cntDep = 0; ?>
+			<?php foreach($fd as $dep): ?>
+			<div class="form-group col-md-6">
+				<input class="form-control" required name="<?php echo 'depL' . $cntDep; ?>" value="<?php echo $dep->fd_L; ?>">
+			</div>
+			<div class="form-group col-md-6">
+				<input class="form-control" required name="<?php echo 'depR' . $cntDep; ?>" value="<?php echo $dep->fd_R; ?>">
+			</div>
+			<?php	$cntDep++; ?>
+			<?php endforeach; ?>
+			<input type="hidden" class="form-control" name="cntKeys" value="<?php echo $cntKeys; ?>">
+			<input type="hidden" class="form-control" name="cntDep" value="<?php echo $cntDep; ?>">
+
+			<button type="submit" class="btn btn-success">Submit</button>
+		</form>
+	</div>
+	<?php endif; ?>
+
+	<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

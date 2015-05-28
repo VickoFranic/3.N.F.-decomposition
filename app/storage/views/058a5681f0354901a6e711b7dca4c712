@@ -1,0 +1,22 @@
+<?php $__env->startSection('content'); ?>
+
+<?php 
+$schema = DB::table('rel_schema')->get(); 
+$pk = DB::table('primary_key')->get();
+$fd = DB::table('func_dependecies')->get();
+?>
+
+<div class="panel-body col-md-4">
+	<p class="well text-center"><b>RELACIJSKE SHEME</b></p>
+	<div class="list-group">
+	<?php foreach($schema as $rs): ?>
+		<div class="list-group-item">
+			<?php echo $rs->rschema; ?>
+
+		</div>
+	<?php endforeach; ?>
+	</div>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

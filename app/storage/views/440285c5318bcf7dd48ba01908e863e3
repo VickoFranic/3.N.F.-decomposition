@@ -1,0 +1,56 @@
+<?php $__env->startSection('content'); ?>
+
+
+<div class="panel-body col-md-4 col-md-offset-1">
+	<p class="well text-center">
+		<b>NEW</b>
+
+		<?php if(!isset($keyNum)): ?>
+		<form method="POST" action="<?php echo URL::route('saveNew'); ?>">
+			<div class="form-group">
+				<label>Shema:</label>
+				<input class="form-control" required name="schema">
+			</div>
+			<div class="form-group">
+				<label>Broj ključeva:</label>
+				<input class="form-control" required name="keyNum">
+			</div>
+			<div class="form-group">
+				<label>Broj funkcionalnih ovisnosti:</label>
+				<input class="form-control" required name="fdNum">
+			</div>
+			<button type="submit" class="btn btn-success">Dalje</button>
+		</form>
+
+		<?php else: ?>
+		<form method="POST" action="<?php echo URL::route('saveNewFinal'); ?>">
+			<div class="form-group">
+				<blockquote>Shema: <?php echo $schema; ?></blockquote>
+			</div>
+			<label>Ključevi:</label>
+			<?php for($i=0; $i < $keyNum; $i++): ?>
+			<div class="form-group">
+				<input class="form-control" required name="<?php echo 'key' . $i; ?>">
+			</div>
+			<?php endfor; ?>
+
+			<label>Funkcijske ovisnosti:</label><br>
+			<?php for($i=0; $i < $fdNum; $i++): ?>
+			<div class="form-group col-md-6">
+				<input class="form-control" required name="<?php echo 'depL' . $i; ?>">
+			</div>
+			<div class="form-group col-md-6">
+				<input class="form-control" required name="<?php echo 'depR' . $i; ?>">
+			</div>
+			<?php endfor; ?>
+			<input type="hidden" class="form-control" name="schema" value="<?php echo $schema; ?>">
+			<input type="hidden" class="form-control" name="keyNum" value="<?php echo $keyNum; ?>">
+			<input type="hidden" class="form-control" name="fdNum" value="<?php echo $fdNum; ?>">
+
+			<button type="submit" class="btn btn-success">Submit</button>
+		</form>
+	</div>
+	<?php endif; ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
