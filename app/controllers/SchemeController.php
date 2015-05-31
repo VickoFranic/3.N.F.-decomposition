@@ -56,8 +56,9 @@ class SchemeController extends BaseController {
 					$test = true;
 				}
 			}
-			if ($test)
+			if ($test) {
 				$testCnt++;
+			}
 
 
 			// splitanje stringa na niz charova
@@ -78,12 +79,14 @@ class SchemeController extends BaseController {
 				}
 			}
 
-			if ($test)
+			if ($test) {
 				$testCnt++;
-		
-			$FDcnt++;
-			if ((($FDcnt == count($fd)) && ($testCnt > 0)) && ($testCnt < (3 * count($fd))))
+			}
+			
+			if (($FDcnt == count($fd)) && ($testCnt > 0))
 				return View::make('showSchemes')->with('test', true)->with('sch', $schema)->with('pk', $pk)->with('fd', $fd);
+
+			$FDcnt++;
 	}
 			
 				// ako nađe ovisnost koja ne zadovoljava uvjete, znaci da nije u 3.N.F. , radimo algoritam
