@@ -32,8 +32,9 @@ class SchemeController extends BaseController {
 			$chars = str_split($in);
 			sort($chars);
 
+			/************************************* TRIVIJALNE OVISNOSTI ****************************/
 			foreach ($chars as $char) {
-				if(strstr($tmpR, $char)) {	// provjeravamo trivijalne ovisnosti
+				if(strstr($tmpR, $char)) {	
 					$test = true;
 				}
 			}
@@ -41,10 +42,11 @@ class SchemeController extends BaseController {
 				$testCnt++;
 			}
 
-			for ($i=0; $i < $keysNum; $i++) {	// petlja prolazi kroz kljuceve i testira da li je lijeva strana F.O. nadkljuc
+			/************************************* DA LI JE LIJEVA STRANA NADKLJUC ? ****************************/
+			for ($i=0; $i < $keysNum; $i++) {
 				$cnt = 0;
 				$k = $pk[$i]->pr_key;
-				//echo $k . "<br>";
+
 				foreach ($chars as $char) {
 					if (strstr($k, $char)) {
 						$cnt++;
@@ -63,19 +65,21 @@ class SchemeController extends BaseController {
 			$chars = str_split($in);
 			sort($chars);
 
-			for ($i=0; $i < $keysNum; $i++) {	// petlja prolazi kroz kljuceve i testira da li se desna strana nalazi u kljucu (osnovni atribut)
+			/************************************* DA LI JE DESNA STRANA OSNOVNI ATRIBUT(dio kljuca) ? ****************************/
+			for ($i=0; $i < $keysNum; $i++) {
 				$cnt = 0;
 				$k = $pk[$i]->pr_key;
 				foreach ($chars as $char) {
 					if (strstr($k, $char))
 						$cnt++;
 				}
-				if ($cnt == count($chars))
-					$test == true;
+				if ($cnt == count($chars)) {
+					$test = true;
+				}
 			}
+
 			if ($test)
 				$testCnt++;
-
 		
 			$FDcnt++;
 			if ((($FDcnt == count($fd)) && ($testCnt > 0)) && ($testCnt < (3 * count($fd))))
