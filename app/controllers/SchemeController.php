@@ -22,8 +22,9 @@ class SchemeController extends BaseController {
 		
 		$FDcnt = 0;
 		foreach ($fd as $row) {
-			$test = false;
 			$testCnt = 0;
+			$test = false;
+
 			$tmpL = $row->fd_L;
 			$tmpR = $row->fd_R;
 
@@ -36,6 +37,7 @@ class SchemeController extends BaseController {
 			foreach ($chars as $char) {
 				if(strstr($tmpR, $char)) {	
 					$test = true;
+
 				}
 			}
 			if ($test) {
@@ -56,6 +58,7 @@ class SchemeController extends BaseController {
 					$test = true;
 				}
 			}
+
 			if ($test) {
 				$testCnt++;
 			}
@@ -82,11 +85,14 @@ class SchemeController extends BaseController {
 			if ($test) {
 				$testCnt++;
 			}
-			
-			if (($FDcnt == count($fd)) && ($testCnt > 0))
-				return View::make('showSchemes')->with('test', true)->with('sch', $schema)->with('pk', $pk)->with('fd', $fd);
 
+			// ako nije ispunjen ni jedan uvjet za F.O. onda nije u 3 N.F. - idemo na dekompoziciju
+			if (!$test)
+				break;
+			
 			$FDcnt++;
+			if (($FDcnt == count($fd)) && ($testCnt < 3))
+				return View::make('showSchemes')->with('test', true)->with('sch', $schema)->with('pk', $pk)->with('fd', $fd);
 	}
 			
 				// ako nađe ovisnost koja ne zadovoljava uvjete, znaci da nije u 3.N.F. , radimo algoritam
