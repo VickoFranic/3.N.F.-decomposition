@@ -17,12 +17,15 @@ Route::get('/', function() {
 
 Route::get('/sheme', array('uses' => 'HomeController@schemes', 'as' => 'sheme'));
 Route::get('/sheme/detalji-sheme/{shema_id}', array('uses' => 'SchemeController@details', 'as' => 'detalji-sheme'));
-Route::get('/scheme/dekompozicija/{shema_id}', array('uses' => 'SchemeController@decomposition', 'as' => 'dekompozicija'));
+Route::get('/sheme/dekompozicija/{shema_id}', array('uses' => 'SchemeController@decomposition', 'as' => 'dekompozicija'));
+Route::get('/sheme/edit/{id}', array('uses' => 'SchemeController@editScheme', 'as' => 'edit'));
+
+//Route::get('/edit', array('uses' => 'SchemeController@showAll', 'as' => 'edit'));
+
+Route::post('/sheme/edit/save/{id}', array('uses' => 'SchemeController@saveScheme', 'as' => 'save'));
 
 
-Route::get('/edit', array('uses' => 'SchemeController@showAll', 'as' => 'edit'));
-Route::get('/edit/{id}', array('uses' => 'SchemeController@editScheme', 'as' => 'editScheme'));
-Route::post('edit/save/{id}', array('uses' => 'SchemeController@saveScheme', 'as' => 'save'));
+Route::get('sheme/delete/{id}', array('uses' => 'SchemeController@deleteScheme', 'as' => 'delete'));
 
 
 Route::get('/new', array('uses' => 'SchemeController@newScheme', 'as' => 'new'));
