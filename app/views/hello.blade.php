@@ -7,9 +7,6 @@
 		<a class="list-group-item" href="{{ URL::Route('sheme') }}">
 			{{ "Prikaži sve sheme/Izračunaj dekompoziciju" }}
 		</a>
-		<a class="list-group-item" href="{{ URL::Route('edit') }}">
-			{{ "Izmjeni postojeću shemu" }}
-		</a>
 		<a class="list-group-item" href="{{ URL::Route('new') }}">
 			{{ "Unesi novu shemu" }}
 		</a>

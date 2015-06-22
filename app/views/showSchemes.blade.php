@@ -12,13 +12,19 @@ $schema = DB::table('rel_schema')->get();
 		@foreach ($schema as $rs)
 		<div class="list-group-item">
 			{{ $rs->rschema }}
-			<a href="{{ URL::route('detalji-sheme', array('scheme_ID' => $rs->ID)) }}">Detalji</a>
+			<a href="{{ URL::route('detalji-sheme', array('scheme_ID' => $rs->ID)) }}"> | Dekompozicija</a> |
+			<a href="{{ URL::route('edit', array('scheme_ID' => $rs->ID)) }}">Uredi</a> |
+			<a href="{{ URL::route('delete', array('scheme_ID' => $rs->ID)) }}">Izbriši</a>
 		</div>
 		@endforeach
 	</div>
 </div>
 
-@if(isset($sch))
+@if(isset($del))
+	<div class="list-group-item col-md-4 col-md-offset-1 text-center" style="margin-top:20px;">
+		{{ "<b>Relacijska shema izbrisana.</b>" }}
+	</div>
+@elseif(isset($sch))
 <div class="panel-body col-md-4 col-md-offset-1">
 	<p class="well text-center">
 		<b>DETALJI</b>
