@@ -11,6 +11,8 @@ class SchemeController extends BaseController {
 		return View::make('showSchemes')->with('id', $shema_id)->with('sch', $schema)->with('pk', $pk)->with('fd', $fd);
 	}
 
+
+
 	/********************************************* ALGORITAM DEKOMPOZICIJE ********************************************/
 	public function decomposition($shema_id) {
 
@@ -28,7 +30,7 @@ class SchemeController extends BaseController {
 			$tmpL = $row->fd_L;
 			$tmpR = $row->fd_R;
 
-			//	splitanje stringa na niz charova
+			//	splitanje stringa na niz charova - objekt koji sadrzi charove - uzimamo lijevu stranu f.o.
 			$in = $tmpL;
 			$chars = str_split($in);
 			sort($chars);
@@ -37,7 +39,6 @@ class SchemeController extends BaseController {
 			foreach ($chars as $char) {
 				if(strstr($tmpR, $char)) {	
 					$test = true;
-
 				}
 			}
 			if ($test) {
@@ -47,7 +48,7 @@ class SchemeController extends BaseController {
 			/************************************* DA LI JE LIJEVA STRANA NADKLJUC ? ****************************/
 			for ($i=0; $i < $keysNum; $i++) {
 				$cnt = 0;
-				$k = $pk[$i]->pr_key;
+				$k = $pk[$i]->pr_key; // uzimamo jedan po jedan primarni kljuc i provjeravamo
 
 				foreach ($chars as $char) {
 					if (strstr($k, $char)) {
@@ -64,7 +65,7 @@ class SchemeController extends BaseController {
 			}
 
 
-			// splitanje stringa na niz charova
+			// splitanje stringa na niz charova - uzimamo sad desnu stranu f.o.
 			$in = $tmpR;
 			$chars = str_split($in);
 			sort($chars);
@@ -73,6 +74,7 @@ class SchemeController extends BaseController {
 			for ($i=0; $i < $keysNum; $i++) {
 				$cnt = 0;
 				$k = $pk[$i]->pr_key;
+
 				foreach ($chars as $char) {
 					if (strstr($k, $char))
 						$cnt++;
@@ -81,7 +83,6 @@ class SchemeController extends BaseController {
 					$test = true;
 				}
 			}
-
 			if ($test) {
 				$testCnt++;
 			}
@@ -100,7 +101,7 @@ class SchemeController extends BaseController {
 				$dcmp[] = '';
 
 				foreach ($fd as $row) {
-					$tmp = $row->fd_L . $row->fd_R;
+					$tmp = $row->fd_L . $row->fd_R;	// spajamo lijevu i desnu stranu f.o.
 
 					//	Sortiranje stringa po abecedi radi provjere
 					$in = $tmp;
@@ -244,5 +245,14 @@ public function showAll() {
 			DB::table('func_depend')->insert(array('Schema_ID' => $id, 'fd_L' => Input::get('depL' . $i), 'fd_R' => Input::get('depR' . $i)));
 		}
 		return View::make('hello')->with('new', true);
+	}
+
+	public function deleteScheme($id) {
+
+		$schema = DB::table('rel_schema')->where('ID', $id)->delete();
+		$pk = DB::table('primary_key')->where('Schema_ID', $id)->delete();			// dohvati primarne kljuceve sheme
+		$fd = DB::table('func_depend')->where('Schema_ID', $id)->delete();	// dohvati sve funkcijske ovisnosti za shemu
+
+		return View::make('showSchemes')->with('del', true)->with('sch', $schema)->with('pk', $pk)->with('fd', $fd);
 	}
 }
