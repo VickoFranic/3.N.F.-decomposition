@@ -4,5 +4,5 @@
 <a href="http://baze.vfdesign.org" target="_blank">Live preview</a>
 <hr>
 
-<img src="vfdesign.org/baze/public/preview.png" />
+<img src="http://vfdesign.org/baze/public/preview.png" />
 
