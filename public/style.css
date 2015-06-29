@@ -1,0 +1,41 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #D6DAD8;
+}
+
+
+.footer {
+  text-align: right;
+  padding-top: 15px;
+  padding-right: 20px;
+  font-size: 1.3em;
+}
+
+
+body {
+	font-family: 'Raleway', sans-serif;
+	background-image: url('back.png');
+	background-repeat: no-repeat;
+	background-position: right;
+	background-attachment: fixed;
+	padding-top: 80px;
+	background-size: 60%;
+	background-color: rgba(192,192,192,0.3);
+}
+
+.container {
+	 opacity: 0.87;
+    filter: alpha(opacity=87); /* For IE8 and earlier */
+}
