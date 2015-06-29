@@ -17,12 +17,12 @@ class PdfController extends BaseController {
 		$html = "<html>
 		<head>
 			<title>Dekompozicija</title>
-			<link rel='stylesheet' href='" . public_path() . "\pdf_boot.css'>
-			<link rel='stylesheet' href='" . public_path() . "\pdf_font.css'>
+			<link rel='stylesheet' href='pdf_boot.css'>
+			<link rel='stylesheet' href='pdf_font.css'>
 		</head>
 		<body>
 		<div class='wrapper'>
-			<img src='" . public_path() . "\slika.png' />
+			<img src='slika.png' />
 			<div class='naslov'>Dekompozicija</div>
 			<hr>
 			<div class='shema'>Shema:<i> " . $sch->rschema . "</i></div>

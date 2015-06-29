@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('body')
+	<body>
+@stop
+
 @section('content')
 
 <?php 

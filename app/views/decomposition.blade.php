@@ -1,14 +1,10 @@
 @extends('layouts.master')
 
+@section('body')
+	<body>
+@stop
+
 @section('content')
-
-<!--
-	$shema_id	- 	varijabla
-	$sch	 	-	objekt
-	$pk 	 	-	objekt
-	$fd 	 	-	objekt
-
--->
 
 <?php
 	Session::put('sch', $sch);

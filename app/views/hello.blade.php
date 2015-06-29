@@ -1,8 +1,12 @@
 @extends('layouts.master')
 
+@section('body')
+	<body class="home">
+@stop
+
 @section('content')
 
-<div class="panel-body">
+<div class="panel-body col-md-4">
 	<div class="list-group text-center">
 		<a class="list-group-item" href="{{ URL::Route('sheme') }}">
 			{{ "Prikaži sve sheme/Izračunaj dekompoziciju" }}

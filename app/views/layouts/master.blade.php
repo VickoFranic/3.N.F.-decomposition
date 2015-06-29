@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 	 {{ HTML::style('style.css') }}
 	<title>BAZE 2 App</title>
 </head>
-<body>
+@yield('body')
 	<div class="container">
-	<h1 class="well text-center">DB App</h1>
+		<div class="well">
+			<h1>DB App</h1>
+			<h3><i>- dekompozicija relacijske sheme u 3. normalnu formu -</i></h3>
+		</div>
+
 	<ul class="nav nav-tabs">
   <li><a href="/">Home</a></li>
 </ul>
