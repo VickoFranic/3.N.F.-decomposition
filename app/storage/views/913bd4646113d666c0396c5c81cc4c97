@@ -6,10 +6,6 @@
 			<?php echo "Prikaži sve sheme/Izračunaj dekompoziciju"; ?>
 
 		</a>
-		<a class="list-group-item" href="<?php echo URL::Route('edit'); ?>">
-			<?php echo "Izmjeni postojeću shemu"; ?>
-
-		</a>
 		<a class="list-group-item" href="<?php echo URL::Route('new'); ?>">
 			<?php echo "Unesi novu shemu"; ?>
 

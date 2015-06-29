@@ -4,11 +4,19 @@
 
 <!--
 	$shema_id	- 	varijabla
-	$schema	 	-	objekt
+	$sch	 	-	objekt
 	$pk 	 	-	objekt
 	$fd 	 	-	objekt
 
 -->
+
+<?php
+	Session::put('sch', $sch);
+	Session::put('pk', $pk);
+	Session::put('fd', $fd);
+	Session::put('dcmp', $dcmp);
+?>
+
 
 <div class="panel-body col-md-4">
 	<p class="well text-center"><b>DEKOMPOZICIJA</b></p>
@@ -29,6 +37,9 @@
 					{{ "<b>Ključ već sadržan, ne dodajemo ga</b>" }}
 				</p>
 			@endif
+			<a href="{{ URL::route('pdf', array('id' => $shema_id)) }}">
+				<input style="margin-top:20px;" type="button" value="Export to PDF" class="btn btn-info" />
+			</a>
 		@endif
 	</div>
 </div>

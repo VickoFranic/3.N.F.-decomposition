@@ -23,7 +23,7 @@ class SchemeController extends BaseController {
 		$keysNum = count($pk);	// broj kljuceva za relacijsku shemu
 		
 		$FDcnt = 0;
-		foreach ($fd as $row) {
+		foreach ($fd as $row) { // Glavna petlja
 			$testCnt = 0;
 			$test = false;
 

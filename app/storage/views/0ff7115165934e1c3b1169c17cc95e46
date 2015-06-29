@@ -11,21 +11,20 @@ $schema = DB::table('rel_schema')->get();
 		<div class="list-group-item">
 			<?php echo $rs->rschema; ?>
 
-			<a href="<?php echo URL::route('detalji-sheme', array('scheme_ID' => $rs->ID)); ?>">Detalji</a>
+			<a href="<?php echo URL::route('detalji-sheme', array('scheme_ID' => $rs->ID)); ?>"> | Dekompozicija</a> |
+			<a href="<?php echo URL::route('edit', array('scheme_ID' => $rs->ID)); ?>">Uredi</a> |
+			<a href="<?php echo URL::route('delete', array('scheme_ID' => $rs->ID)); ?>">Izbriši</a>
 		</div>
 		<?php endforeach; ?>
 	</div>
-	<?php if(isset($test)): ?>	<!-- ako je sema vec u 3.N.F. -->
-	<div class="list-group">
-		<div class="list-group-item">
-			<?php echo "<b>Relacijska shema je već u 3. N.F. !!</b>"; ?>
-
-		</div>
-	</div>
-	<?php endif; ?>
 </div>
 
-<?php if(isset($sch)): ?>
+<?php if(isset($del)): ?>
+	<div class="list-group-item col-md-4 col-md-offset-1 text-center" style="margin-top:20px;">
+		<?php echo "<b>Relacijska shema izbrisana.</b>"; ?>
+
+	</div>
+<?php elseif(isset($sch)): ?>
 <div class="panel-body col-md-4 col-md-offset-1">
 	<p class="well text-center">
 		<b>DETALJI</b>
@@ -54,8 +53,16 @@ $schema = DB::table('rel_schema')->get();
 		<?php endforeach; ?>
 	</div>
 	<a href="<?php echo URL::route('dekompozicija', array('scheme_ID' => $sch->ID)); ?>">
-		<input style="margin-top:20px" type="button" value="Dekompozicija" class="btn btn-danger" />
+		<input style="margin-top:20px;" type="button" value="Dekompozicija" class="btn btn-danger" />
 	</a>
+	<?php if(isset($test)): ?>	<!-- ako je sema vec u 3.N.F. -->
+	<div class="list-group">
+		<div class="list-group-item" style="margin-top:20px;">
+			<?php echo "<b>Relacijska shema je već u 3. N.F. !!</b>"; ?>
+
+		</div>
+	</div>
+	<?php endif; ?>
 </div>
 <?php endif; ?>
 

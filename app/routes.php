@@ -31,3 +31,5 @@ Route::get('sheme/delete/{id}', array('uses' => 'SchemeController@deleteScheme',
 Route::get('/new', array('uses' => 'SchemeController@newScheme', 'as' => 'new'));
 Route::post('/new/save', array('uses' => 'SchemeController@saveNew', 'as' => 'saveNew'));
 Route::post('/new/save-scheme', array('uses' => 'SchemeController@saveNewFinal', 'as' => 'saveNewFinal'));
+
+Route::get('/sheme/dekompozicija/{id}/pdf', array('uses' => 'PdfController@generate', 'as' => 'pdf'));
